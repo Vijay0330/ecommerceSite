@@ -72,5 +72,13 @@ app.use(defaultErrorHandler);
 const cors = require('cors');
 app.use(cors());
 app.use(express.static(path.join(__dirname,"Frontent/build")));
+if (process.env.NODE_ENV === 'production') {
+    // Serve any static files
+    app.use(express.static(path.join(__dirname, 'Frontend/build')));
+  // Handle React routing, return all requests to React app
+    app.get('*', function(req, res) {
+      res.sendFile(path.join(__dirname, 'Frontend/build', 'index.html'));
+    });
+  }
 
 module.exports = app;

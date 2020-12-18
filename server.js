@@ -69,5 +69,8 @@ app.use(notFoundHandler);
 
 // Mount catch-all error handler
 app.use(defaultErrorHandler);
+const cors = require('cors');
+app.use(cors());
+app.use(express.static(path.join(__dirname,"Frontent/build")));
 
 module.exports = app;
